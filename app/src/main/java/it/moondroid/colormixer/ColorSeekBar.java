@@ -23,15 +23,6 @@ public abstract class ColorSeekBar extends SeekBar {
         super(context, attrs, defStyle);
     }
 
-    @Override
-    protected void onSizeChanged(int width, int height, int oldw, int oldh) {
-        super.onSizeChanged(width, height, oldw, oldh);
-
-        setThumb(getResources().getDrawable(R.drawable.seekbar_thumb));
-        setThumbOffset((int) (18*getResources().getDisplayMetrics().density));
-
-    }
-
     public abstract float getHue();
     public abstract float getSaturation();
     public abstract float getLightness();

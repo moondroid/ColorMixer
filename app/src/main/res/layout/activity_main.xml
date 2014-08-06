@@ -19,18 +19,24 @@
             android:id="@+id/hue_seekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:thumb="@drawable/seekbar_thumb"
+            android:thumbOffset="18dp"
             />
 
         <it.moondroid.colormixer.SaturationSeekBar
             android:id="@+id/saturation_seekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:thumb="@drawable/seekbar_thumb"
+            android:thumbOffset="18dp"
             />
 
         <it.moondroid.colormixer.LightnessSeekBar
             android:id="@+id/lightness_seekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:thumb="@drawable/seekbar_thumb"
+            android:thumbOffset="18dp"
             />
 
         </LinearLayout>
