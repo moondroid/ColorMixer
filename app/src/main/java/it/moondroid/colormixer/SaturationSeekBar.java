@@ -2,7 +2,6 @@ package it.moondroid.colormixer;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.SeekBar;
 
 /**
  * Created by marco.granatiero on 05/08/2014.
@@ -25,7 +24,7 @@ public class SaturationSeekBar extends ColorSeekBar {
     protected void onSizeChanged(int width, int height, int oldw, int oldh) {
         super.onSizeChanged(width, height, oldw, oldh);
 
-        setProgressDrawable(ColorUtils.getSaturationBar(mHSL, width, height));
+        setProgressDrawable(ColorDrawableBuilder.getSaturationBar(mHSL, width, height));
         setMax(HSLColor.SATURATION_MAX);
 
     }
@@ -55,7 +54,7 @@ public class SaturationSeekBar extends ColorSeekBar {
     @Override
     public void setColor(int color){
         mHSL = new HSLColor(HSLColor.fromRGB(color));
-        setProgressDrawable(ColorUtils.getSaturationBar(mHSL, getWidth(), getHeight()));
+        setProgressDrawable(ColorDrawableBuilder.getSaturationBar(mHSL, getWidth(), getHeight()));
     }
 
     @Override

@@ -2,15 +2,11 @@ package it.moondroid.colormixer;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.SeekBar;
 
 /**
  * Created by marco.granatiero on 05/08/2014.
  */
 public class LightnessSeekBar extends ColorSeekBar {
-
-    private HSLColor mHSL = new HSLColor(0.0f, 100.0f, 50.0f); //Default color
-    private int width, height;
 
     public LightnessSeekBar(Context context) {
         super(context);
@@ -28,7 +24,7 @@ public class LightnessSeekBar extends ColorSeekBar {
     protected void onSizeChanged(int width, int height, int oldw, int oldh) {
         super.onSizeChanged(width, height, oldw, oldh);
 
-        setProgressDrawable(ColorUtils.getLightnessBar(mHSL, width, height));
+        setProgressDrawable(ColorDrawableBuilder.getLightnessBar(mHSL, width, height));
         setMax(HSLColor.LIGHTNESS_MAX);
 
     }
@@ -58,7 +54,7 @@ public class LightnessSeekBar extends ColorSeekBar {
     @Override
     public void setColor(int color){
         mHSL = new HSLColor(HSLColor.fromRGB(color));
-        setProgressDrawable(ColorUtils.getLightnessBar(mHSL, getWidth(), getHeight()));
+        setProgressDrawable(ColorDrawableBuilder.getLightnessBar(mHSL, getWidth(), getHeight()));
     }
 
     @Override

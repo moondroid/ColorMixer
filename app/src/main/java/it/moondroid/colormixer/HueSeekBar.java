@@ -1,13 +1,7 @@
 package it.moondroid.colormixer;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Shader;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.util.AttributeSet;
-import android.widget.SeekBar;
 
 /**
  * Created by marco.granatiero on 05/08/2014.
@@ -30,7 +24,7 @@ public class HueSeekBar extends ColorSeekBar {
     protected void onSizeChanged(int width, int height, int oldw, int oldh) {
         super.onSizeChanged(width, height, oldw, oldh);
 
-        setProgressDrawable(ColorUtils.getHueBar(width, height));
+        setProgressDrawable(ColorDrawableBuilder.getHueBar(width, height));
 
         setMax(HSLColor.HUE_MAX);
 

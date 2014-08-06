@@ -9,7 +9,7 @@ import android.graphics.drawable.ShapeDrawable;
 /**
  * Created by marco.granatiero on 05/08/2014.
  */
-public class ColorUtils  {
+public class ColorDrawableBuilder {
 
     private static final float PADDING_TOP_BOTTOM_PERCENT = 0.4f;
 
@@ -22,14 +22,7 @@ public class ColorUtils  {
             idx++;
         }
 
-
-        GradientDrawable dr = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, cols);
-        dr.setShape(GradientDrawable.RECTANGLE);
-
-        int paddingTopBottom = (int) (height*PADDING_TOP_BOTTOM_PERCENT / 2.0f);
-        InsetDrawable idr =  new InsetDrawable(dr, 0,paddingTopBottom,0,paddingTopBottom);
-
-        return idr;
+        return buildDrawable(cols, width, height);
     }
 
 
@@ -39,13 +32,7 @@ public class ColorUtils  {
         cols[1] = color.getRGB();
         cols[2] = color.adjustLuminance(100.0f);
 
-        GradientDrawable dr = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, cols);
-        dr.setShape(GradientDrawable.RECTANGLE);
-
-        int paddingTopBottom = (int) (height*PADDING_TOP_BOTTOM_PERCENT / 2.0f);
-        InsetDrawable idr =  new InsetDrawable(dr, 0,paddingTopBottom,0,paddingTopBottom);
-
-        return idr;
+        return buildDrawable(cols, width, height);
     }
 
     public static final Drawable getSaturationBar(HSLColor color, int width, int height) {
@@ -53,6 +40,10 @@ public class ColorUtils  {
         cols[0] = color.adjustSaturation(0.0f);
         cols[1] = color.adjustSaturation(100.0f);
 
+        return buildDrawable(cols, width, height);
+    }
+
+    private static Drawable buildDrawable(int[] cols, int width, int height){
         GradientDrawable dr = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, cols);
         dr.setShape(GradientDrawable.RECTANGLE);
 
@@ -61,6 +52,5 @@ public class ColorUtils  {
 
         return idr;
     }
-
 
 }
