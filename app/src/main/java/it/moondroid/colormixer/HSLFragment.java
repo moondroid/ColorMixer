@@ -102,11 +102,9 @@ public class HSLFragment extends Fragment implements SeekBar.OnSeekBarChangeList
             mHSL.setHue(mHueSeekBar.getHue());
         }
         if(seekBar instanceof LightnessSeekBar){
-            Log.d("HSLFragment", "getLightness() "+mLightnessSeekBar.getLightness());
             mHSL.setLuminance(mLightnessSeekBar.getLightness());
         }
         if(seekBar instanceof SaturationSeekBar){
-            Log.d("HSLFragment", "getSaturation() "+mSaturationSeekBar.getSaturation());
             mHSL.setSaturation(mSaturationSeekBar.getSaturation());
         }
 
@@ -122,8 +120,6 @@ public class HSLFragment extends Fragment implements SeekBar.OnSeekBarChangeList
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-//        mLightnessSeekBar.setColor(mHSL.getRGB());
-//        mSaturationSeekBar.setColor(mHSL.getRGB());
 
         updateSeekBars(seekBar);
 
