@@ -158,19 +158,19 @@ public class HSLColor {
     }
 
     public HSLColor addLuminance(float l) {
-        this.hsl[2] = (this.hsl[2] + l) % 100.0f;
+        this.hsl[2] = (this.hsl[2] + l) % 101.0f;
         this.rgb = toRGB(this.hsl);
         return this;
     }
 
     public HSLColor addSaturation(float s) {
-        this.hsl[1] = (this.hsl[1] + s) % 100.0f;
+        this.hsl[1] = (this.hsl[1] + s) % 101.0f;
         this.rgb = toRGB(this.hsl);
         return this;
     }
 
     public int adjust(float hue, float s, float l, float alpha) {
-        return toRGB((this.hsl[0] + hue) % 360.0f, (this.hsl[1] + s) % 100.0f, (this.hsl[2] + l) % 100.0f, (this.hsl[3] + alpha) % 256.0f);
+        return toRGB((this.hsl[0] + hue) % 360.0f, (this.hsl[1] + s) % 101.0f, (this.hsl[2] + l) % 101.0f, (this.hsl[3] + alpha) % 256.0f);
     }
 
     public int adjustHue(float degrees) {
@@ -282,7 +282,7 @@ public class HSLColor {
     }
 
     public int lighten(float by) {
-        return toRGB(this.hsl[0], this.hsl[1], (this.hsl[2] + by) % 100.0f, this.hsl[3]);
+        return toRGB(this.hsl[0], this.hsl[1], (this.hsl[2] + by) % 101.0f, this.hsl[3]);
     }
 
     public int rotate(float degrees) {
@@ -290,7 +290,7 @@ public class HSLColor {
     }
 
     public int saturate(float by) {
-        return toRGB(this.hsl[0], (this.hsl[1] + by) % 100.0f, this.hsl[2], this.hsl[3]);
+        return toRGB(this.hsl[0], (this.hsl[1] + by) % 101.0f, this.hsl[2], this.hsl[3]);
     }
 
     public HSLColor setAlpha(float alpha) {
@@ -322,7 +322,7 @@ public class HSLColor {
     }
 
     public HSLColor setLuminance(float l) {
-        this.hsl[2] = l % 100.0f;
+        this.hsl[2] = l % 101.0f;
         this.rgb = toRGB(this.hsl);
         return this;
     }
@@ -334,7 +334,8 @@ public class HSLColor {
     }
 
     public HSLColor setSaturation(float s) {
-        this.hsl[1] = s % 100.0f;
+
+        this.hsl[1] = s % 101.0f;
         this.rgb = toRGB(this.hsl);
         return this;
     }

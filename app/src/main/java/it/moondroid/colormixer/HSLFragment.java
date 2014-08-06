@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,14 +102,15 @@ public class HSLFragment extends Fragment implements SeekBar.OnSeekBarChangeList
             mHSL.setHue(mHueSeekBar.getHue());
         }
         if(seekBar instanceof LightnessSeekBar){
+            Log.d("HSLFragment", "getLightness() "+mLightnessSeekBar.getLightness());
             mHSL.setLuminance(mLightnessSeekBar.getLightness());
         }
         if(seekBar instanceof SaturationSeekBar){
+            Log.d("HSLFragment", "getSaturation() "+mSaturationSeekBar.getSaturation());
             mHSL.setSaturation(mSaturationSeekBar.getSaturation());
         }
 
-        mLightnessSeekBar.setColor(mHSL.getRGB());
-        mSaturationSeekBar.setColor(mHSL.getRGB());
+        updateSeekBars(seekBar);
 
         mNextColor.setBackgroundColor(mHSL.getRGB());
     }
@@ -120,10 +122,25 @@ public class HSLFragment extends Fragment implements SeekBar.OnSeekBarChangeList
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        mLightnessSeekBar.setColor(mHSL.getRGB());
-        mSaturationSeekBar.setColor(mHSL.getRGB());
+//        mLightnessSeekBar.setColor(mHSL.getRGB());
+//        mSaturationSeekBar.setColor(mHSL.getRGB());
+
+        updateSeekBars(seekBar);
 
         mListener.onColorChange(mHSL.getRGB());
     }
 
+
+    private void updateSeekBars(SeekBar seekBar){
+        if(seekBar instanceof HueSeekBar){
+            mLightnessSeekBar.setColor(mHSL.getRGB());
+            mSaturationSeekBar.setColor(mHSL.getRGB());
+        }
+        if(seekBar instanceof LightnessSeekBar){
+            mSaturationSeekBar.setColor(mHSL.getRGB());
+        }
+        if(seekBar instanceof SaturationSeekBar){
+            mLightnessSeekBar.setColor(mHSL.getRGB());
+        }
+    }
 }
