@@ -128,15 +128,9 @@ public class HSLFragment extends Fragment implements SeekBar.OnSeekBarChangeList
 
 
     private void updateSeekBars(SeekBar seekBar){
-        if(seekBar instanceof HueSeekBar){
-            mLightnessSeekBar.setColor(mHSL.getRGB());
-            mSaturationSeekBar.setColor(mHSL.getRGB());
-        }
-        if(seekBar instanceof LightnessSeekBar){
-            mSaturationSeekBar.setColor(mHSL.getRGB());
-        }
-        if(seekBar instanceof SaturationSeekBar){
-            mLightnessSeekBar.setColor(mHSL.getRGB());
-        }
+
+        mLightnessSeekBar.setColor(mHSL);
+        mSaturationSeekBar.setColor(mHSL);
+
     }
 }

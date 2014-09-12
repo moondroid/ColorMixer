@@ -58,6 +58,12 @@ public class LightnessSeekBar extends ColorSeekBar {
     }
 
     @Override
+    public void setColor(HSLColor color) {
+        mHSL = color;
+        setProgressDrawable(ColorDrawableBuilder.getLightnessBar(mHSL, getWidth(), getHeight()));
+    }
+
+    @Override
     public int getColor(){
         mHSL.setLuminance(getProgress());
         return mHSL.getRGB();

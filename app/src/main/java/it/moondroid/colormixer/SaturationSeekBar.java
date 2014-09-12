@@ -58,6 +58,12 @@ public class SaturationSeekBar extends ColorSeekBar {
     }
 
     @Override
+    public void setColor(HSLColor color) {
+        mHSL = color;
+        setProgressDrawable(ColorDrawableBuilder.getSaturationBar(mHSL, getWidth(), getHeight()));
+    }
+
+    @Override
     public int getColor(){
         mHSL.setSaturation(getProgress());
         return mHSL.getRGB();

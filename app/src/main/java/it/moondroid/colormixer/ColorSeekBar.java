@@ -31,5 +31,7 @@ public abstract class ColorSeekBar extends SeekBar {
 
     public abstract void setColor(int color);
 
+    public abstract void setColor(HSLColor color);
+
     public abstract int getColor();
 }

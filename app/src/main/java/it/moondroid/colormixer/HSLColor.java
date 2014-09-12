@@ -322,7 +322,7 @@ public class HSLColor {
     }
 
     public HSLColor setLuminance(float l) {
-        this.hsl[2] = l % 101.0f;
+        this.hsl[2] = l<100.0f? l % 100.0f : 100.0f;
         this.rgb = toRGB(this.hsl);
         return this;
     }
@@ -335,12 +335,18 @@ public class HSLColor {
 
     public HSLColor setSaturation(float s) {
 
-        this.hsl[1] = s % 101.0f;
+        this.hsl[1] = s<100.0f? s % 100.0f : 100.0f;
         this.rgb = toRGB(this.hsl);
         return this;
     }
 
     public String toString() {
-        return new StringBuilder("HSLColor[h=").append(this.hsl[0]).append(",s=").append(this.hsl[1]).append(",l=").append(this.hsl[2]).append(",a=").append(this.hsl[3]).append("]").toString();
+        return new StringBuilder("HSLColor[h=").append(this.hsl[0]).append(", s=").append(this.hsl[1]).append(", l=").append(this.hsl[2]).append(", a=").append(this.hsl[3]).append("]").toString();
     }
+
+    public String toRGBString(){
+        return new StringBuilder("HSLColor[r=").append(Color.red(rgb)).append(", g=").append(Color.green(rgb)).append(", b=").append(Color.blue(rgb)).append("]").toString();
+
+    }
+
 }

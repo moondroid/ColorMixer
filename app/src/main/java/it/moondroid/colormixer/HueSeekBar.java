@@ -58,6 +58,11 @@ public class HueSeekBar extends ColorSeekBar {
     }
 
     @Override
+    public void setColor(HSLColor color) {
+        mHSL = color;
+    }
+
+    @Override
     public int getColor(){
         mHSL.setHue(getProgress());
         return mHSL.getRGB();
