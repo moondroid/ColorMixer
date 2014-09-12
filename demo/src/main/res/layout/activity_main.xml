@@ -13,13 +13,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Activity"
             android:id="@+id/button_activity" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Dialog"
+            android:id="@+id/button_dialog" />
+
     </LinearLayout>
 
 </RelativeLayout>

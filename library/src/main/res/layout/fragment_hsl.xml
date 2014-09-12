@@ -1,9 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp">
 
     <LinearLayout
+        android:id="@+id/layout_seekbars"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@drawable/seekbar_divider"
@@ -74,7 +76,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/layout_seekbars"
+        android:layout_marginTop="32dp"
         android:orientation="horizontal">
 
         <View

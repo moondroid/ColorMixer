@@ -1,9 +1,11 @@
 package it.moondroid.colormixer;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,7 @@ import android.widget.TextView;
  * to handle interaction events.
  *
  */
-public class HSLFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
+public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChangeListener {
 
     private HSLColor mHSL = new HSLColor(0.0f, 100.0f, 50.0f); //Default color
 
@@ -47,10 +49,13 @@ public class HSLFragment extends Fragment implements SeekBar.OnSeekBarChangeList
         public void onColorChange(int color);
     }
 
+    public static HSLFragment newInstance() {
+        return new HSLFragment();
+    }
+
     public HSLFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

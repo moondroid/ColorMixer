@@ -7,8 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import it.moondroid.colormixer.HSLFragment;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements HSLFragment.OnColorChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,15 @@ public class MainActivity extends ActionBarActivity {
                 startActivityForResult(i, 0);
             }
         });
-    }
 
+        findViewById(R.id.button_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HSLFragment fragment = HSLFragment.newInstance();
+                fragment.show(getFragmentManager(), "dialog");
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,5 +51,10 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onColorChange(int color) {
+
     }
 }
