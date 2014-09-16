@@ -27,6 +27,8 @@ import android.widget.TextView;
 public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChangeListener {
 
     private static final String ARGS_KEY_MODAL = "is_modal";
+    private static final String ARGS_KEY_COLOR = "color";
+
     private HSLColor mHSL = new HSLColor(0.0f, 100.0f, 50.0f); //Default color
 
     private HueSeekBar mHueSeekBar;
@@ -45,20 +47,21 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
         public void onColorCancel();
     }
 
-    public static HSLFragment newInstance() {
+    public static HSLFragment newInstance(Integer startColor) {
         HSLFragment f = new HSLFragment();
-        putArguments(f, true);
+        putArguments(f, startColor, true);
         return f;
     }
 
     public HSLFragment() {
         // Required empty public constructor
-        putArguments(this, false);
+        putArguments(this, mHSL.getRGB(), false);
     }
 
 
-    private static void putArguments(HSLFragment fragment, Boolean isModal){
+    private static void putArguments(HSLFragment fragment, Integer startColor, Boolean isModal){
         Bundle args = new Bundle();
+        args.putInt(ARGS_KEY_COLOR, startColor);
         args.putBoolean(ARGS_KEY_MODAL, isModal);
         fragment.setArguments(args);
     }
@@ -112,6 +115,9 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
 
 
     private void setupUI(View view){
+
+        mHSL.setRGB(getArguments().getInt(ARGS_KEY_COLOR, mHSL.getRGB()));
+
         mHueSeekBar = (HueSeekBar)view.findViewById(R.id.hue_seekbar);
         mHueSeekBar.initWithColor(mHSL.getRGB());
         mHueSeekBar.setOnSeekBarChangeListener(this);

@@ -1,11 +1,13 @@
 package it.moondroid.colormixerdemo.demo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import it.moondroid.colormixer.HSLColor;
@@ -14,12 +16,18 @@ import it.moondroid.colormixer.HSLFragment;
 
 public class MainActivity extends ActionBarActivity implements HSLFragment.OnColorChangeListener {
 
-    private int mColor;
+    private int mColor = Color.RED;
+    private View mColorView;
+    private TextView mColorTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mColorView = findViewById(R.id.view_color);
+        mColorTextView = (TextView)findViewById(R.id.text_color);
+        setColor(mColor);
 
         findViewById(R.id.button_activity).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,10 +40,17 @@ public class MainActivity extends ActionBarActivity implements HSLFragment.OnCol
         findViewById(R.id.button_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HSLFragment fragment = HSLFragment.newInstance();
+                HSLFragment fragment = HSLFragment.newInstance(mColor);
                 fragment.show(getFragmentManager(), "dialog");
             }
         });
+    }
+
+    private void setColor(int color){
+        mColor = color;
+        String hexColor = String.format("#%06X", (0xFFFFFF & mColor));
+        mColorView.setBackgroundColor(color);
+        mColorTextView.setText(hexColor);
     }
 
     @Override
@@ -64,9 +79,8 @@ public class MainActivity extends ActionBarActivity implements HSLFragment.OnCol
 
     @Override
     public void onColorConfirmed(int color) {
-        mColor = color;
-        String hexColor = String.format("#%06X", (0xFFFFFF & mColor));
-        Toast.makeText(this, "color: " + hexColor, Toast.LENGTH_LONG).show();
+
+        setColor(color);
     }
 
     @Override
