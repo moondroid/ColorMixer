@@ -29,21 +29,14 @@ public class MainActivity extends ActionBarActivity implements HSLFragment.OnCol
         mColorTextView = (TextView)findViewById(R.id.text_color);
         setColor(mColor);
 
-        findViewById(R.id.button_activity).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, FragmentActivity.class);
-                startActivityForResult(i, 0);
-            }
-        });
-
-        findViewById(R.id.button_dialog).setOnClickListener(new View.OnClickListener() {
+        mColorView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 HSLFragment fragment = HSLFragment.newInstance(mColor);
                 fragment.show(getFragmentManager(), "dialog");
             }
         });
+
     }
 
     private void setColor(int color){
