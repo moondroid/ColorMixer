@@ -7,6 +7,34 @@ ColorMixer is a widget for choosing a color in HSV color-space.
 ![Demo](art/screenshot.png)
 
 
+### Code Samples
+For example, to show a dialog:
+
+```java
+HSLFragment fragment = HSLFragment.newInstance(mColor);
+fragment.show(getFragmentManager(), "dialog");
+```
+
+Your activity has to implement ``HSLFragment.OnColorChangeListener`` through these methods:
+
+```java
+@Override
+public void onColorChange(int color) {
+    //called everytime the color changes
+}
+
+@Override
+public void onColorConfirmed(int color) {
+    //called when the user press the confirm button in the dialog
+}
+
+@Override
+public void onColorCancel() {
+    //called when the user press the cancel button in the dialog
+}
+```
+
+
 ### License
 
 ```
