@@ -8,7 +8,7 @@ ColorMixer is a widget for choosing a color in HSV color-space.
 
 
 ### Code Samples
-For example, to show a dialog:
+For example, to show a dialog with mColor as starting color:
 
 ```java
 HSLFragment fragment = HSLFragment.newInstance(mColor);
