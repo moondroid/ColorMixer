@@ -1,7 +1,10 @@
 package it.moondroid.colormixer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -23,6 +26,7 @@ import android.widget.TextView;
  */
 public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChangeListener {
 
+    private static final String ARGS_KEY_MODAL = "is_modal";
     private HSLColor mHSL = new HSLColor(0.0f, 100.0f, 50.0f); //Default color
 
     private HueSeekBar mHueSeekBar;
@@ -34,52 +38,91 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
 
     private OnColorChangeListener mListener;
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnColorChangeListener {
 
         public void onColorChange(int color);
     }
 
     public static HSLFragment newInstance() {
-        return new HSLFragment();
+        HSLFragment f = new HSLFragment();
+        putArguments(f, true);
+        return f;
     }
 
     public HSLFragment() {
         // Required empty public constructor
+        putArguments(this, false);
+    }
+
+
+    private static void putArguments(HSLFragment fragment, Boolean isModal){
+        Bundle args = new Bundle();
+        args.putBoolean(ARGS_KEY_MODAL, isModal);
+        fragment.setArguments(args);
+    }
+
+    /** The system calls this only when creating the layout in a dialog. */
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_hsl, null);
+        alertDialogBuilder.setView(view);
+        alertDialogBuilder.setTitle(getResources().getString(R.string.dialog_hsl_title));
+        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.dialog_hsl_btn_positive), new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+            }
+        });
+        alertDialogBuilder.setNegativeButton(getResources().getString(R.string.dialog_hsl_btn_negative), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        setupUI(view);
+        return alertDialogBuilder.create();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_hsl, container, false);
+        boolean isModal = getArguments().getBoolean(ARGS_KEY_MODAL);
 
-        mHueSeekBar = (HueSeekBar)rootView.findViewById(R.id.hue_seekbar);
+        if(isModal) // AVOID REQUEST FEATURE CRASH
+        {
+            return super.onCreateView(inflater, container, savedInstanceState);
+
+        } else {
+            View rootView = inflater.inflate(R.layout.fragment_hsl, container, false);
+            setupUI(rootView);
+
+            return rootView;
+        }
+
+    }
+
+
+    private void setupUI(View view){
+        mHueSeekBar = (HueSeekBar)view.findViewById(R.id.hue_seekbar);
         mHueSeekBar.initWithColor(mHSL.getRGB());
         mHueSeekBar.setOnSeekBarChangeListener(this);
-        mLightnessSeekBar = (LightnessSeekBar)rootView.findViewById(R.id.lightness_seekbar);
+        mLightnessSeekBar = (LightnessSeekBar)view.findViewById(R.id.lightness_seekbar);
         mLightnessSeekBar.initWithColor(mHSL.getRGB());
         mLightnessSeekBar.setOnSeekBarChangeListener(this);
-        mSaturationSeekBar = (SaturationSeekBar)rootView.findViewById(R.id.saturation_seekbar);
+        mSaturationSeekBar = (SaturationSeekBar)view.findViewById(R.id.saturation_seekbar);
         mSaturationSeekBar.initWithColor(mHSL.getRGB());
         mSaturationSeekBar.setOnSeekBarChangeListener(this);
 
 
-        mPreviousColor = rootView.findViewById(R.id.previous_color);
+        mPreviousColor = view.findViewById(R.id.previous_color);
         mPreviousColor.setBackgroundColor(mHSL.getRGB());
-        mNextColor = rootView.findViewById(R.id.next_color);
+        mNextColor = view.findViewById(R.id.next_color);
         mNextColor.setBackgroundColor(mHSL.getRGB());
-
-        return rootView;
     }
 
 
