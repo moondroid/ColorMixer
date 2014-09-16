@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import it.moondroid.colormixer.HSLColor;
 import it.moondroid.colormixer.HSLFragment;
 
 
 public class MainActivity extends ActionBarActivity implements HSLFragment.OnColorChangeListener {
+
+    private int mColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,18 @@ public class MainActivity extends ActionBarActivity implements HSLFragment.OnCol
 
     @Override
     public void onColorChange(int color) {
+
+    }
+
+    @Override
+    public void onColorConfirmed(int color) {
+        mColor = color;
+        String hexColor = String.format("#%06X", (0xFFFFFF & mColor));
+        Toast.makeText(this, "color: " + hexColor, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onColorCancel() {
 
     }
 }

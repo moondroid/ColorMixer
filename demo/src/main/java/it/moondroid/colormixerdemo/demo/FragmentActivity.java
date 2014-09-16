@@ -41,4 +41,14 @@ public class FragmentActivity extends ActionBarActivity implements HSLFragment.O
     public void onColorChange(int color) {
 
     }
+
+    @Override
+    public void onColorConfirmed(int color) {
+
+    }
+
+    @Override
+    public void onColorCancel() {
+
+    }
 }

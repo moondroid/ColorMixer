@@ -41,6 +41,8 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
     public interface OnColorChangeListener {
 
         public void onColorChange(int color);
+        public void onColorConfirmed(int color);
+        public void onColorCancel();
     }
 
     public static HSLFragment newInstance() {
@@ -74,12 +76,14 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+                mListener.onColorConfirmed(mHSL.getRGB());
                 dialog.dismiss();
             }
         });
         alertDialogBuilder.setNegativeButton(getResources().getString(R.string.dialog_hsl_btn_negative), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mListener.onColorCancel();
                 dialog.dismiss();
             }
         });
@@ -117,7 +121,6 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
         mSaturationSeekBar = (SaturationSeekBar)view.findViewById(R.id.saturation_seekbar);
         mSaturationSeekBar.initWithColor(mHSL.getRGB());
         mSaturationSeekBar.setOnSeekBarChangeListener(this);
-
 
         mPreviousColor = view.findViewById(R.id.previous_color);
         mPreviousColor.setBackgroundColor(mHSL.getRGB());
