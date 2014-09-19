@@ -80,14 +80,18 @@
         android:layout_marginTop="32dp"
         android:orientation="horizontal">
 
-        <View
+        <TextView
             android:id="@+id/previous_color"
+            android:gravity="center"
+            tools:text="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <View
+        <TextView
             android:id="@+id/next_color"
+            android:gravity="center"
+            tools:text="#FFFFFF"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />

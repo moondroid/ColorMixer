@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -35,8 +36,8 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
     private LightnessSeekBar mLightnessSeekBar;
     private SaturationSeekBar mSaturationSeekBar;
 
-    private View mPreviousColor;
-    private View mNextColor;
+    private TextView mPreviousColor;
+    private TextView mNextColor;
 
     private OnColorChangeListener mListener;
 
@@ -128,10 +129,11 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
         mSaturationSeekBar.initWithColor(mHSL.getRGB());
         mSaturationSeekBar.setOnSeekBarChangeListener(this);
 
-        mPreviousColor = view.findViewById(R.id.previous_color);
-        mPreviousColor.setBackgroundColor(mHSL.getRGB());
-        mNextColor = view.findViewById(R.id.next_color);
-        mNextColor.setBackgroundColor(mHSL.getRGB());
+        mPreviousColor = (TextView)view.findViewById(R.id.previous_color);
+        updateColorTextView(mPreviousColor, mHSL);
+        mNextColor = (TextView)view.findViewById(R.id.next_color);
+        updateColorTextView(mNextColor, mHSL);
+
     }
 
 
@@ -155,19 +157,22 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        if(seekBar instanceof HueSeekBar){
-            mHSL.setHue(mHueSeekBar.getHue());
-        }
-        if(seekBar instanceof LightnessSeekBar){
-            mHSL.setLuminance(mLightnessSeekBar.getLightness());
-        }
-        if(seekBar instanceof SaturationSeekBar){
-            mHSL.setSaturation(mSaturationSeekBar.getSaturation());
+        if(fromUser){
+            if(seekBar instanceof HueSeekBar){
+                mHSL.setHue(mHueSeekBar.getHue());
+            }
+            if(seekBar instanceof LightnessSeekBar){
+                mHSL.setLuminance(mLightnessSeekBar.getLightness());
+            }
+            if(seekBar instanceof SaturationSeekBar){
+                mHSL.setSaturation(mSaturationSeekBar.getSaturation());
+            }
+
+            updateSeekBars(seekBar);
+
+            updateColorTextView(mNextColor, mHSL);
         }
 
-        updateSeekBars(seekBar);
-
-        mNextColor.setBackgroundColor(mHSL.getRGB());
     }
 
     @Override
@@ -188,6 +193,27 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
 
         mLightnessSeekBar.setColor(mHSL);
         mSaturationSeekBar.setColor(mHSL);
+
+    }
+
+    private void updateColorTextView(TextView view, HSLColor color){
+        int rgb = color.getRGB();
+        view.setBackgroundColor(rgb);
+        String hexColor = String.format("#%06X", (0xFFFFFF & rgb));
+        view.setText(hexColor);
+        if(color.getSaturation()<50.0f){
+            if(color.getLuminance()>50.0f){
+                view.setTextColor(Color.BLACK);
+            }else {
+                view.setTextColor(Color.WHITE);
+            }
+
+        }else {
+            HSLColor textColor = new HSLColor(HSLColor.fromRGB(color.getComplementary()));
+            textColor.setLuminance(100.0f - color.getLuminance());
+            view.setTextColor(textColor.getRGB());
+        }
+
 
     }
 }

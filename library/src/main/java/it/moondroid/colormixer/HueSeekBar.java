@@ -2,6 +2,7 @@ package it.moondroid.colormixer;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 /**
  * Created by marco.granatiero on 05/08/2014.
@@ -48,6 +49,7 @@ public class HueSeekBar extends ColorSeekBar {
 
     @Override
     public void initWithColor(int color){
+        setMax(HSLColor.HUE_MAX);
         setColor(color);
         setProgress((int) mHSL.getHue());
     }
