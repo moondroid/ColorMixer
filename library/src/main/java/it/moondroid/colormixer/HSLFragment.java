@@ -36,8 +36,8 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
     private LightnessSeekBar mLightnessSeekBar;
     private SaturationSeekBar mSaturationSeekBar;
 
-    private TextView mPreviousColor;
-    private TextView mNextColor;
+    private ColorTextView mPreviousColor;
+    private ColorTextView mNextColor;
 
     private OnColorChangeListener mListener;
 
@@ -129,10 +129,10 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
         mSaturationSeekBar.initWithColor(mHSL.getRGB());
         mSaturationSeekBar.setOnSeekBarChangeListener(this);
 
-        mPreviousColor = (TextView)view.findViewById(R.id.previous_color);
-        updateColorTextView(mPreviousColor, mHSL);
-        mNextColor = (TextView)view.findViewById(R.id.next_color);
-        updateColorTextView(mNextColor, mHSL);
+        mPreviousColor = (ColorTextView)view.findViewById(R.id.previous_color);
+        mPreviousColor.setColor(mHSL);
+        mNextColor = (ColorTextView)view.findViewById(R.id.next_color);
+        mNextColor.setColor(mHSL);
 
     }
 
@@ -170,7 +170,7 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
 
             updateSeekBars(seekBar);
 
-            updateColorTextView(mNextColor, mHSL);
+            mNextColor.setColor(mHSL);
         }
 
     }
@@ -196,24 +196,4 @@ public class HSLFragment extends DialogFragment implements SeekBar.OnSeekBarChan
 
     }
 
-    private void updateColorTextView(TextView view, HSLColor color){
-        int rgb = color.getRGB();
-        view.setBackgroundColor(rgb);
-        String hexColor = String.format("#%06X", (0xFFFFFF & rgb));
-        view.setText(hexColor);
-        if(color.getSaturation()<50.0f){
-            if(color.getLuminance()>50.0f){
-                view.setTextColor(Color.BLACK);
-            }else {
-                view.setTextColor(Color.WHITE);
-            }
-
-        }else {
-            HSLColor textColor = new HSLColor(HSLColor.fromRGB(color.getComplementary()));
-            textColor.setLuminance(100.0f - color.getLuminance());
-            view.setTextColor(textColor.getRGB());
-        }
-
-
-    }
 }
