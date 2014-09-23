@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import it.moondroid.colormixer.ColorFragment;
 import it.moondroid.colormixer.HSLFragment;
 import it.moondroid.colormixer.VennColorsWidget;
 
@@ -38,6 +39,9 @@ public class MainActivity extends ActionBarActivity implements HSLFragment.OnCol
                     mWhichCircle = which;
 
                     HSLFragment fragment = HSLFragment.newInstance(color);
+                    fragment.show(getFragmentManager(), "dialog");
+                }else{
+                    ColorFragment fragment = ColorFragment.newInstance(color);
                     fragment.show(getFragmentManager(), "dialog");
                 }
             }

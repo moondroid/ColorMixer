@@ -10,5 +10,9 @@
     <string name="dialog_hsl_title">Set Color</string>
     <string name="dialog_hsl_btn_positive">Ok</string>
     <string name="dialog_hsl_btn_negative">Cancel</string>
+    <string name="dialog_color_title">Color</string>
+    <string name="dialog_color_btn_positive">Copy</string>
+    <string name="dialog_color_btn_negative">Cancel</string>
+    <string name="toast_color_copied">Color copied to clipboard</string>
 
 </resources>

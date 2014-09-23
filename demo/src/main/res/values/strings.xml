@@ -2,10 +2,8 @@
 <resources>
 
     <string name="app_name">ColorMixer Demo</string>
-    <string name="action_settings">Settings</string>
 
     <string name="action_mode_darken">DARKEN</string>
     <string name="action_mode_add">ADD</string>
-
 
 </resources>
