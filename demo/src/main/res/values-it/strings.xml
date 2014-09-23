@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">ColorMixer Demo</string>
-    <string name="action_settings">Impostazioni</string>
+
+    <string name="action_mode_add">ADDITIVA</string>
+    <string name="action_mode_darken">SCURISCI</string>
 
 </resources>
