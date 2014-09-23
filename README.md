@@ -2,8 +2,13 @@ ColorMixer
 ===========
 ### Description
 ColorMixer is a widget for choosing a color in HSV color-space.
+The demo app can also be found on the [Play Store](https://play.google.com/store/apps/details?id=it.moondroid.colormixerdemo.demo)
 
+[logo]: https://developer.android.com/images/brand/en_app_rgb_wo_45.png
+[google]: https://play.google.com/store/apps/details?id=it.moondroid.colormixerdemo.demo "Play Store"
+[![the google logo][logo]][google]
 
+### Screenshot
 ![Demo](art/screenshot.png)
 
 
