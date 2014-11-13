@@ -1,5 +1,6 @@
 ColorMixer
 ===========
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ColorMixer-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/991)
 ### Description
 ColorMixer is a widget for choosing a color in HSV color-space.
 
