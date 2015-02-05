@@ -41,6 +41,14 @@ public void onColorCancel() {
 }
 ```
 
+### Quick Start
+
+ChangeLog Library is pushed to Maven Central as a AAR, so you just need to add the following dependency to your `build.gradle`.
+
+    dependencies {
+        compile 'com.github.moondroid.colormixer:library:1.0'
+    }
+
 
 ### License
 
